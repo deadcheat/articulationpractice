@@ -1,2 +1,6 @@
 package: github.com/deadcheat/twister
-import: []
+import:
+- package: github.com/aws/aws-lambda-go
+  version: ^1.2.0
+  subpackages:
+  - lambda
