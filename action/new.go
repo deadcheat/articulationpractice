@@ -17,8 +17,8 @@ func New(req alexa.RequestEnvelope) (alexa.ResponseEnvelope, error) {
 	i := rand.Intn(globals.TwsitersSize)
 	q := values.Twisters[i]
 	mi := req.Session.Attributes[values.SessionAttributeKeyMatch]
-	m := globals.ConvertInterfaceToMatch(mi)
 	sa := make(map[string]interface{})
+	m := globals.ConvertInterfaceToMatch(mi)
 	if m == nil {
 		// TODO this pattern, error occured...
 		m = &types.Match{
