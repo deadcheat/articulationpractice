@@ -8,11 +8,12 @@ import (
 	"github.com/deadcheat/alexa"
 	"github.com/deadcheat/twister/action"
 	"github.com/deadcheat/twister/globals"
+	"github.com/deadcheat/twister/values"
 )
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	globals.TwsitersSize = len(values.Twsiters)
+	globals.TwsitersSize = len(values.Twisters)
 	// create lambda handler
 	h := alexa.NewLambdaHandler()
 
@@ -21,9 +22,9 @@ func main() {
 	h.HandleEnd(action.End)
 
 	/// assign intent handlers
-	h.HandleIntent("", func(alexa.RequestEnvelope) (alexa.ResponseEnvelope, error) {
-		return alexa.EmptyResponse, alexa.ErrNoHandler
-	})
+	h.HandleIntent([]string{alexa.IntentAMAZONMoreIntent, alexa.IntentAMAZONYesIntent, alexa.IntentAMAZONNextIntent}, action.New)
+
+	h.HandleIntent([]string{alexa.IntentAMAZONStopIntent, alexa.IntentAMAZONNoIntent}, action.End)
 
 	lambda.Start(h.Handle)
 }
