@@ -4,3 +4,5 @@ import:
   version: ^1.2.0
   subpackages:
   - lambda
+- package: github.com/rs/xid
+  version: ^1.2.0

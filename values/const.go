@@ -1,5 +1,20 @@
 package values
 
+// Intent names
+const (
+	TwisterAnswerIntent = "TwisterAnswerIntent"
+)
+
+// Slot Names
+const (
+	AnswerSlot = "AnswerSlot"
+)
+
+// Map keys
+const (
+	SessionAttributeKeyMatch = "SessionAttributeKeyMatch"
+)
+
 var (
 	// Twisters 早口言葉の出題
 	Twisters = []string{

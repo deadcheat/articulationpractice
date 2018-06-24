@@ -1,8 +1,14 @@
-hash: b19b2cf065877624ecea2ed8adc47c075c449d281c3cc3240cbc9d0bade513ed
-updated: 2018-06-21T23:37:38.306844+09:00
+hash: 60b4c0bc44af13c3be4b4e4f6168f453b394745fc2325093e91c97ed45ccba02
+updated: 2018-06-24T22:20:24.237666+09:00
 imports:
 - name: github.com/aws/aws-lambda-go
   version: 4d30d0ff60440c2d0480a15747c96ee71c3c53d4
   subpackages:
   - lambda
+  - lambda/messages
+  - lambdacontext
+- name: github.com/deadcheat/alexa
+  version: 5cd63ccfec6bcf692d50baaf30d3cf2d381eebb3
+- name: github.com/rs/xid
+  version: 2c7e97ce663ff82c49656bca3048df0fdd83c5f9
 testImports: []
