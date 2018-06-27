@@ -1,6 +1,8 @@
 package action
 
 import (
+	"fmt"
+
 	"github.com/deadcheat/alexa"
 	"github.com/deadcheat/twister/globals"
 	"github.com/deadcheat/twister/values"
@@ -21,20 +23,28 @@ func Answer(req alexa.RequestEnvelope) (alexa.ResponseEnvelope, error) {
 				ShouldEndSession: true,
 			}), nil
 	}
-	sa := make(map[string]interface{})
-	message := "残念、正しく聞き取れませんでした"
+	message := "残念、正しく聞き取れませんでした。もう一度挑戦される場合は、はい、や、次、などのように話しかけてください。"
 	if m.Current.Text == req.Intent.Slots[values.AnswerSlot].Value {
 		m.Current.Success = true
 		m.Score++
-		message = "正解です、おめでとうございます"
+		message = `<say-as interpret-as="interjection">正解です、おめでとうございます</say-as><audio src='https://s3.amazonaws.com/ask-soundlibrary/human/amzn_sfx_crowd_applause_01.mp3'/>
+		もう一度挑戦される場合は、はい、や、次、などのように話しかけてください。`
 	}
+	ssml := fmt.Sprintf(`<speak>%s</speak>`, message)
+	sa := make(map[string]interface{})
 	sa[values.SessionAttributeKeyMatch] = *m
 	return alexa.ResponseEnvelopeV1(
 		sa,
 		alexa.Response{
 			OutputSpeech: &alexa.OutputSpeech{
-				Type: alexa.TypePlainText,
-				Text: message,
+				Type: alexa.TypeSSML,
+				SSML: ssml,
+			},
+			Reprompt: &alexa.Reprompt{
+				OutputSpeech: &alexa.OutputSpeech{
+					Type: alexa.TypePlainText,
+					Text: "もう一度挑戦される場合は、はい、や、次、などのように話しかけてください。",
+				},
 			},
 			ShouldEndSession: false,
 		}), nil
