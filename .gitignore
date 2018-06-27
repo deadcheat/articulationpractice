@@ -12,3 +12,8 @@
 *.out
 
 vendor/**
+
+# binary and zip
+*.zip
+twister
+
