@@ -1,9 +1,11 @@
 package action
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/deadcheat/alexa"
+	"github.com/deadcheat/twister/globals"
 	"github.com/deadcheat/twister/types"
 	"github.com/deadcheat/twister/values"
 	"github.com/rs/xid"
@@ -36,13 +38,26 @@ func Launch(alexa.RequestEnvelope) (alexa.ResponseEnvelope, error) {
 }
 
 // End execute when alexa end skills
-func End(alexa.RequestEnvelope) (alexa.ResponseEnvelope, error) {
+func End(req alexa.RequestEnvelope) (alexa.ResponseEnvelope, error) {
+	mi := req.Session.Attributes[values.SessionAttributeKeyMatch]
+	m := globals.ConvertInterfaceToMatch(mi)
+	if m == nil {
+		return alexa.ResponseEnvelopeV1(
+			alexa.EmptySessionAttributes,
+			alexa.Response{
+				OutputSpeech: &alexa.OutputSpeech{
+					Type: alexa.TypePlainText,
+					Text: "また練習したくなったら呼んでくださいね、さようなら",
+				},
+				ShouldEndSession: true,
+			}), nil
+	}
 	return alexa.ResponseEnvelopeV1(
 		alexa.EmptySessionAttributes,
 		alexa.Response{
 			OutputSpeech: &alexa.OutputSpeech{
 				Type: alexa.TypePlainText,
-				Text: "また練習したくなったら呼んでくださいね、さようなら",
+				Text: fmt.Sprintf("今回は%d回正解しました。また練習したくなったら呼んでくださいね、さようなら", m.Score),
 			},
 			ShouldEndSession: true,
 		}), nil
