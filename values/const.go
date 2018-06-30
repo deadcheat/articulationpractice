@@ -7,7 +7,9 @@ const (
 
 // Slot Names
 const (
-	AnswerSlot = "AnswerSlot"
+	AnswerSlot            = "AnswerSlot"
+	TwisterContinueIntent = "TwisterContinueIntent"
+	TwisterEndIntent      = "TwisterEndIntent"
 )
 
 // Map keys

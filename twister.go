@@ -20,10 +20,10 @@ func main() {
 	// assign handler to request and intent
 	h.HandleLaunch(action.Launch)
 	h.HandleEnd(action.End)
-	h.HandleIntent([]string{alexa.IntentAMAZONStopIntent, alexa.IntentAMAZONNoIntent}, action.End)
+	h.HandleIntent([]string{values.TwisterEndIntent, alexa.IntentAMAZONStopIntent, alexa.IntentAMAZONNoIntent}, action.End)
 
 	/// assign intent handlers
-	h.HandleIntent([]string{alexa.IntentAMAZONMoreIntent, alexa.IntentAMAZONYesIntent, alexa.IntentAMAZONNextIntent}, action.New)
+	h.HandleIntent([]string{values.TwisterContinueIntent, alexa.IntentAMAZONMoreIntent, alexa.IntentAMAZONYesIntent, alexa.IntentAMAZONNextIntent}, action.New)
 	h.HandleIntent([]string{values.TwisterAnswerIntent}, action.Answer)
 
 	lambda.Start(h.Handle)
