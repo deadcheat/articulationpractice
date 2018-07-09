@@ -25,6 +25,7 @@ func main() {
 	/// assign intent handlers
 	h.HandleIntent([]string{values.TwisterContinueIntent, alexa.IntentAMAZONMoreIntent, alexa.IntentAMAZONYesIntent, alexa.IntentAMAZONNextIntent}, action.New)
 	h.HandleIntent([]string{values.TwisterAnswerIntent}, action.Answer)
+	h.HandleIntent([]string{alexa.IntentAMAZONHelpIntent}}, action.Help)
 
 	lambda.Start(h.Handle)
 }
