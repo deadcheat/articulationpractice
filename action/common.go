@@ -11,6 +11,25 @@ import (
 	"github.com/rs/xid"
 )
 
+// Help execute when user call help
+func Help(alexa.RequestEnvelope) (alexa.ResponseEnvelope, error) {
+	return alexa.ResponseEnvelopeV1(
+		alexa.EmptySessionAttributes,
+		alexa.Response{
+			OutputSpeech: &alexa.OutputSpeech{
+				Type: alexa.TypePlainText,
+				Text: "このスキルでは、早口言葉の練習をすることができます。準備ができたら、OK、や、次、スタートのように話しかけてください。早口言葉のお題を読み上げますので、読み上げたとおりに繰り返してください。正確に聞き取ることができたら、正解になります。それでは、早口言葉をはじめます。心と口の準備はよろしいですか？",
+			},
+			Reprompt: &alexa.Reprompt{
+				OutputSpeech: &alexa.OutputSpeech{
+					Type: alexa.TypePlainText,
+					Text: "準備ができたら、OK、や、次、スタートのように話しかけてください。",
+				},
+			},
+			ShouldEndSession: false,
+		}), nil
+}
+
 // Launch execute when alexa launch skills
 func Launch(alexa.RequestEnvelope) (alexa.ResponseEnvelope, error) {
 	sa := make(map[string]interface{})
